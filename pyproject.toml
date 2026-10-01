@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wifi-deauth-detector"
+version = "1.0.0"
+description = "Defensive detector for 802.11 deauthentication and disassociation attacks, from pcap captures or a live monitor-mode interface."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Believe", email = "bombilebelieve@gmail.com" }]
+keywords = [
+  "wifi",
+  "802.11",
+  "deauthentication",
+  "deauth",
+  "disassociation",
+  "wireless",
+  "security",
+  "ids",
+  "pcap",
+  "radiotap",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Information Technology",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Security",
+  "Topic :: System :: Networking :: Monitoring",
+  "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+capture = ["scapy>=2.5"]
+dev = ["pytest>=7.4", "pytest-cov>=4.1"]
+
+[project.scripts]
+wifi-deauth-detector = "deauth_detector.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Believe-sec-io/wifi-deauth-detector"
+Issues = "https://github.com/Believe-sec-io/wifi-deauth-detector/issues"
+Changelog = "https://github.com/Believe-sec-io/wifi-deauth-detector/blob/main/CHANGELOG.md"
+
+[tool.setuptools]
+packages = ["deauth_detector"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+
+[tool.coverage.run]
+source = ["deauth_detector"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = ["pragma: no cover", "raise NotImplementedError", "if TYPE_CHECKING:"]
