@@ -54,4 +54,8 @@ jobs:
       - name: Generate the example capture and analyse it
         run: |
           python examples/demo_attack.py
-          python main.py examples/attack.pcap --fail-on high --no-color
+          python main.py examples/attack.pcap --fail-on none --no-color
+          python main.py examples/attack.pcap --format json --fail-on none -o report.json
+          python -c "import json; d=json.load(open('report.json')); assert d['total_alerts'] == 5, d"
+          rc=0; python main.py examples/attack.pcap --fail-on high --no-color > /dev/null 2>&1 || rc=$?
+          test "$rc" -eq 1
